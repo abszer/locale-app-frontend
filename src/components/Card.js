@@ -6,8 +6,8 @@ import { BiDownvote } from 'react-icons/bi'
 const Card = ({ post, handleUpVote, handleDownVote }) => {
      return (
           // transform transition-all duration-300 hover:scale-105 hover:shadow-xl
-          <div className="flex flex-col items-center rounded-md mt-2 mb-5 shadow-md">
-               <img className="object-fill  cursor-pointer rounded-tr-md rounded-tl-md" src={post.image} alt="post" />
+          <div className="flex flex-col items-center bg-gray-50 rounded-md mt-2 mb-5 shadow-md w-full border">
+               <img className=" object-scale-down cursor-pointer rounded-tr-md rounded-tl-md w-full h-64" src={post.image} alt="post" />
                <div className="bot-bar mt-0.5 bg-white rounded-bl-md rounded-br-md w-full">
                     <div className="title-location flex flex-col items-center">
                          <p className="font-heading antialiased text-lg text-black">{post.title}</p>
