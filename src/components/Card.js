@@ -3,10 +3,11 @@ import { BiUpvote } from 'react-icons/bi'
 import { BiDownvote } from 'react-icons/bi'
 
 
-const Card = ({ post }) => {
+const Card = ({ post, handleUpVote, handleDownVote }) => {
      return (
-          <div className="flex flex-col items-center rounded-md mt-2 mb-5 cursor-pointer shadow-md transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-               <img className="object-fill rounded-tr-md rounded-tl-md" src={post.image} alt="post" />
+          // transform transition-all duration-300 hover:scale-105 hover:shadow-xl
+          <div className="flex flex-col items-center rounded-md mt-2 mb-5 shadow-md">
+               <img className="object-fill  cursor-pointer rounded-tr-md rounded-tl-md" src={post.image} alt="post" />
                <div className="bot-bar mt-0.5 bg-white rounded-bl-md rounded-br-md w-full">
                     <div className="title-location flex flex-col items-center">
                          <p className="font-heading antialiased text-lg text-black">{post.title}</p>
@@ -14,8 +15,14 @@ const Card = ({ post }) => {
                     </div>
                     <div className="votes-date flex w-full items-center justify-between pl-3 pr-3">
                          <div className="flex">
-                              <BiUpvote />
-                              <BiDownvote />
+                              <div className="up flex flex-col items-center">
+                                   <p className="text-xl flex mr-2 cursor-pointer hover:text-green-500"><BiUpvote onClick={() => handleUpVote(post)}/></p>
+                                   <p>{post.upVotes}</p>
+                              </div>
+                              <div className="down flex flex-col items-center">
+                                   <p className="text-xl cursor-pointer hover:text-red-500"><BiDownvote onClick={() => handleDownVote(post)}/></p>
+                                   <p>{post.downVotes}</p>
+                              </div>
                          </div>
                          <p className="">{post.date.slice(0, 10)}</p>
                     </div>
