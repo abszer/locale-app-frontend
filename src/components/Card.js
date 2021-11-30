@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BiUpvote } from 'react-icons/bi'
 import { BiDownvote } from 'react-icons/bi'
 
 
+
 const Card = ({ post, handleUpVote, handleDownVote }) => {
+     const [ formattedTags, setFormattedTags ] = useState([]);
+
+     const createFormattedTags = (tags) => {
+          const tagArr = tags.split(';');
+          setFormattedTags(tagArr);  
+     }
+     
+     useEffect(() => {
+          createFormattedTags(post.tags);
+     }, [])
+
      return (
           // transform transition-all duration-300 hover:scale-105 hover:shadow-xl
           <div className="flex flex-col items-center bg-gray-50 rounded-md mt-2 mb-5 shadow-md w-full md:w-72 border">

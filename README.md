@@ -8,6 +8,8 @@
 
 ## Day 7
 - Added more appealing CSS
+- Added React Router
+- Created formatter for tags
 
 ## Attributions
 - Ecommerce Icons made by feen from https://www.flaticon.com/authors/feen

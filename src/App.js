@@ -11,6 +11,8 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [currentSession, setCurrentSession] = useState('');
 
+  
+  // sends get request to api and stores data in "posts" state
   const getPosts = () => {
     axios.get("https://localeapi.azurewebsites.net/api/posts")
       .then((response) => {
@@ -19,6 +21,7 @@ const App = () => {
       })
   }
 
+  // sends put request to api and increments upvotes by 1
   const handleUpVote = (post) => {
     axios.put("https://localeapi.azurewebsites.net/api/posts/" + post.postId, {...post, 'upVotes': post.upVotes + 1 })
       .then((response) => {
@@ -27,6 +30,7 @@ const App = () => {
       })
   }
 
+  // sends put request to api and decrements downvotes by 1
   const handleDownVote = (post) => {
     axios.put("https://localeapi.azurewebsites.net/api/posts/" + post.postId, {...post, 'downVotes': post.downVotes - 1 })
       .then((response) => {
