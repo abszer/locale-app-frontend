@@ -5,6 +5,13 @@
 
 body {
   background-color: #f7f7f8;
+  height: 100vh;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 /* body {

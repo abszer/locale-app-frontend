@@ -17,7 +17,7 @@ const SearchBar = () => {
      }
 
      return (
-          <div className="search-bar">
+          <div className="search-bar sticky top-20">
                <form autoComplete="off" action="" className="search-bar flex justify-center mt-3 relative w-screen">
                     <FaSearch className={ !searchIconVisible ? "hidden" : "absolute top-1.5 left-1/4 text-gray-400"}/>
                     <input id="search" placeholder="" onKeyPress={searchIconOnKeyPress} className="rounded-full border border-gray-200 shadow-md w-3/5 text-center focus:outline-none focus:ring-2 focus:ring-blue-400" type="text"/>
