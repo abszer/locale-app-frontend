@@ -43,7 +43,7 @@ const App = () => {
     <>
       <Header />
       <SearchBar />
-      <div className="container flex flex-wrap justify-between w-3/4 m-auto mt-10">
+      <div className="container flex flex-wrap justify-between md:justify-around w-3/4 m-auto mt-10">
         {
           posts.map((post) => {
             return (
