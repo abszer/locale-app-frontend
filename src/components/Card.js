@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BiUpvote } from 'react-icons/bi'
 import { BiDownvote } from 'react-icons/bi'
+import { FaDivide } from 'react-icons/fa';
 
 
 
@@ -9,7 +10,12 @@ const Card = ({ post, handleUpVote, handleDownVote }) => {
 
      const createFormattedTags = (tags) => {
           const tagArr = tags.split(';');
-          setFormattedTags(tagArr);  
+          if(tagArr.length < 5){
+               setFormattedTags(tagArr);
+          } else {
+               setFormattedTags(tagArr.slice(0, 4));
+          }
+            
      }
      
      useEffect(() => {
@@ -23,20 +29,31 @@ const Card = ({ post, handleUpVote, handleDownVote }) => {
                <div className="bot-bar mt-0.5 bg-white rounded-bl-md rounded-br-md w-full">
                     <div className="title-location flex flex-col items-center">
                          <p className="font-heading antialiased text-lg text-black">{post.title}</p>
-                         <p className="font-body text-sm text-gray-700">{post.location}</p>
+                         <p className="font-body text-xs text-gray-700">{post.location}</p>
                     </div>
                     <div className="votes-date flex w-full items-center justify-between pl-3 pr-3">
-                         <div className="flex">
+                         <div className="flex flex-col">
                               <div className="up flex flex-col items-center">
-                                   <p className="text-xl flex mr-2 cursor-pointer hover:text-red-400"><BiUpvote onClick={() => handleUpVote(post)}/></p>
-                                   <p className="text-red-400">{post.upVotes}</p>
+                                   <p className="text-blue-400">{post.upVotes}</p>
+                                   <p className="text-xl flex cursor-pointer hover:text-blue-400"><BiUpvote onClick={() => handleUpVote(post)}/></p>
                               </div>
                               <div className="down flex flex-col items-center">
-                                   <p className="text-xl cursor-pointer hover:text-blue-400"><BiDownvote onClick={() => handleDownVote(post)}/></p>
-                                   <p className="text-blue-400">{post.downVotes}</p>
+                                   <p className="text-xl cursor-pointer hover:text-red-400"><BiDownvote onClick={() => handleDownVote(post)}/></p>
+                                   <p className="text-red-400">{post.downVotes}</p>
                               </div>
                          </div>
-                         <p className="">{post.date.slice(0, 10)}</p>
+                         <div className="tag-container flex flex-row justify-end gap-2 w-3/4">
+                         {
+                              formattedTags.map((tag) => {
+                                   return (
+                                        <div className="tag bg-blue-100 pl-1 pr-1 shadow-md rounded-sm hover:bg-blue-200 cursor-pointer">
+                                             <p>{tag}</p>
+                                        </div>
+                                   )
+                              })
+                         }
+                         </div>
+                         
                     </div>
                </div>
           </div>
