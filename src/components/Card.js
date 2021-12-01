@@ -42,7 +42,7 @@ const Card = ({ post, handleUpVote, handleDownVote }) => {
                                    <p className="text-red-400">{post.downVotes}</p>
                               </div>
                          </div>
-                         <div className="tag-container flex flex-row justify-end gap-2 w-3/4">
+                         <div className="tag-container flex flex-row flex-wrap justify-end gap-2 w-3/4">
                          {
                               formattedTags.map((tag) => {
                                    return (
