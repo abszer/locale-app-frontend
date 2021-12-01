@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { BiUpvote } from 'react-icons/bi'
 import { BiDownvote } from 'react-icons/bi'
-import { FaDivide } from 'react-icons/fa';
 
 
 
@@ -20,7 +19,7 @@ const Card = ({ post, handleUpVote, handleDownVote }) => {
      
      useEffect(() => {
           createFormattedTags(post.tags);
-     }, [])
+     }, [post.tags])
 
      return (
           // transform transition-all duration-300 hover:scale-105 hover:shadow-xl
@@ -44,9 +43,9 @@ const Card = ({ post, handleUpVote, handleDownVote }) => {
                          </div>
                          <div className="tag-container flex flex-row flex-wrap justify-end gap-2 w-3/4">
                          {
-                              formattedTags.map((tag) => {
+                              formattedTags.map((tag, index) => {
                                    return (
-                                        <div className="tag bg-blue-100 pl-1 pr-1 shadow-md rounded-sm hover:bg-blue-200 cursor-pointer">
+                                        <div key={index} className="tag bg-blue-100 pl-1 pr-1 shadow-md rounded-sm hover:bg-blue-200 cursor-pointer">
                                              <p>{tag}</p>
                                         </div>
                                    )
