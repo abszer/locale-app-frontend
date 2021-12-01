@@ -10,6 +10,7 @@
 - Added more appealing CSS
 - Added React Router
 - Created formatter for tags
+- Created sign in page and create post routes and preliminary pages
 
 ## Attributions
 - Ecommerce Icons made by feen from https://www.flaticon.com/authors/feen
