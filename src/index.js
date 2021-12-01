@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import NewPost from './routes/newpost';
 import LoginForm from './routes/login';
+import SignUpForm from './routes/signup';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
@@ -12,8 +13,9 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="newpost" element={<NewPost />} />
-        <Route path="login" element={<LoginForm />} />
+        <Route path="/newpost" element={<NewPost />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/signup" element={<SignUpForm />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

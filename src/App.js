@@ -9,7 +9,7 @@ const App = () => {
   // const emptyPost = { postId: '', title: '', date: '', image: '', location: '', upvVotes: '', downVotes: '', author: '', tags: ''}
   
   const [posts, setPosts] = useState([]);
-  const [currentSession, setCurrentSession] = useState('');
+  const [currentUser, setCurrentUser] = useState({username: localStorage.getItem('username'), rep: localStorage.getItem('rep')});
 
   
   // sends get request to api and stores data in "posts" state
@@ -40,13 +40,30 @@ const App = () => {
   }
 
 
+  ////// USER AUTH /////
+
+  const handleSignUp = (e) => {
+    
+  }
+
+  const submitLogIn = (e) => {
+    e.preventDefault()
+  }
+
+  const testFunc = () => {
+    alert(test);
+  }
+
+
   useEffect(() => {
+
     getPosts()
+    setCurrentUser({username: localStorage.getItem('username'), rep: localStorage.getItem('rep')})
   }, [])
 
   return (
     <>
-      <Header />
+      <Header submitLogIn={submitLogIn}/>
       <SearchBar />
       <div className="container flex flex-wrap justify-between md:justify-around w-3/4 h-full m-auto mt-10">
         {
