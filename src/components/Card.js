@@ -8,6 +8,7 @@ import ImageModal from './ImageModal'
 const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick }) => {
      const [ formattedTags, setFormattedTags ] = useState([]);
      const [ imageEnlarged, setImageEnlarged] = useState(false)
+     const [ postTitleColor, setPostTitleColor ] = useState("")
 
      // uses ' ; ' as a delimeter to separate tags into an array (max 6)
      const createFormattedTags = (tags) => {
@@ -24,10 +25,17 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick }) => {
           setImageEnlarged(!imageEnlarged)
           handleImgOnClick()
      }
+
+     // depending on number of upvotes post title will either be green or red
+     const determineTitleColor = (upVotes, downVotes) => {
+          upVotes > Math.abs(downVotes) ? setPostTitleColor("text-green-400") : setPostTitleColor("text-red-400");
+     }
+
      
      useEffect(() => {
           createFormattedTags(post.tags);
-     }, [post.tags])
+          determineTitleColor(post.upVotes, post.downVotes);
+     }, [post.tags, post.upVotes, post.downVotes])
 
      return (
           // transform transition-all duration-300 hover:scale-105 hover:shadow-xl
@@ -35,17 +43,17 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick }) => {
                <img onClick={handleOnClick} className="object-cover cursor-pointer rounded-tr-md  rounded-tl-md w-full h-64 mb-1" src={post.image} alt="post" />
                <div className="bot-bar mt-0.5 bg-white rounded-bl-md rounded-br-md w-full">
                     <div className="title-location flex flex-col items-center pb-2 border-b w-3/4 m-auto">
-                         <p className="font-heading antialiased text-lg text-black">{post.title}</p>
+                         <p className={"font-heading antialiased text-lg " + postTitleColor}>{post.title}</p>
                          <p className="flex justify-center items-center gap-2 font-body text-xs text-blue-700 hover:text-blue-900 cursor-pointer"><GrMapLocation />{post.location}</p>
                     </div>
                     <div className="votes-date flex w-full items-center justify-between pl-3 pr-3">
                          <div className="flex flex-col">
                               <div className="up flex flex-col items-center">
                                    <p className="text-blue-400">{post.upVotes}</p>
-                                   <p className="select-none text-xl flex cursor-pointer hover:text-blue-400"><BiUpvote onClick={() => handleUpVote(post)}/></p>
+                                   <p className="select-none text-xl flex cursor-pointer shadow hover:text-blue-400"><BiUpvote onClick={() => handleUpVote(post)}/></p>
                               </div>
                               <div className="down flex flex-col items-center">
-                                   <p className="text-xl cursor-pointer hover:text-red-400"><BiDownvote onClick={() => handleDownVote(post)}/></p>
+                                   <p className="text-xl cursor-pointer shadow hover:text-red-400"><BiDownvote onClick={() => handleDownVote(post)}/></p>
                                    <p className="select-none text-red-400">{post.downVotes}</p>
                               </div>
                          </div>
