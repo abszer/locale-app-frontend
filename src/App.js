@@ -13,6 +13,7 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(useLocalStorage("currentUser"));
   const [currentUserRep, setCurrentUserRep] = useState(useLocalStorage("currentUserRep"));
+  const [footerHidden, setFooterHidden] = useState(false);
 
   
   // sends get request to api and stores data in "posts" state
