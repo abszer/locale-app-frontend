@@ -2,21 +2,24 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import { MdShareLocation } from 'react-icons/md';
+import useLocalStorage from '../useLocalStorage';
 
 const Header = ({submitLogIn}) => {
 
      const [ profileIconClicked, setProfileIconClicked ] = useState(false);
-     const [ currentUser, setCurrentUser ] = useState('') 
-     // in the future have this passed down as a prop ^^^ (currentSession)
+     const [ currentUser, setCurrentUser ] = useState(useLocalStorage("currentUser"));
+
 
      const handleProfileIconClicked = () => {
           setProfileIconClicked(!profileIconClicked);
           console.log(submitLogIn)
      }
 
-     const handleLogIn = (e) => {
-          console.log("this is a test")
-          console.log(submitLogIn)
+     const handleLogout = () => {
+          setCurrentUser()
+          localStorage.clear()
+          localStorage.removeItem("currentUser")
+          localStorage.removeItem("currentUserRep")
      }
 
      return (
@@ -35,10 +38,13 @@ const Header = ({submitLogIn}) => {
                </div>
 
                {/* this menu will appear when a user is logged in */}
-               <div className={ profileIconClicked && currentUser ? "flex flex-col justify-around items-center login-signup h-44 w-40 bg-gray-50 absolute top-16 right-3 rounded-md shadow-md" : "hidden"}>
-                    <button className="">Log In</button>
-                    <button>Sign Up</button>
-               </div>
+               {
+                    currentUser !== "" &&
+                    <div className={ profileIconClicked && currentUser ? "flex flex-col justify-around items-center login-signup h-44 w-40 bg-gray-50 absolute top-16 right-3 rounded-md shadow-md" : "hidden"}>
+                         <button className="select-none bg-blue-400 hover:bg-blue-500 text-lg text-white font-bold w-3/4 h-1/5 rounded-md"><Link to={"/login"} >Profile</Link></button>
+                         <button onClick={handleLogout} className="select-none bg-blue-400 hover:bg-blue-500 text-lg text-white font-bold w-3/4 h-1/5 rounded-md">Logout</button>
+                    </div>
+               }
           </header>
      )
 }

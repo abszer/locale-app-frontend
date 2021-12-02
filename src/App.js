@@ -4,12 +4,15 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Card from './components/Card';
 import Footer from './components/Footer';
+import useLocalStorage from './useLocalStorage';
+
 
 const App = () => {
   // const emptyPost = { postId: '', title: '', date: '', image: '', location: '', upvVotes: '', downVotes: '', author: '', tags: ''}
   
   const [posts, setPosts] = useState([]);
-  const [currentUser, setCurrentUser] = useState({username: localStorage.getItem('username'), rep: localStorage.getItem('rep')});
+  const [currentUser, setCurrentUser] = useState(useLocalStorage("currentUser"));
+  const [currentUserRep, setCurrentUserRep] = useState(useLocalStorage("currentUserRep"));
 
   
   // sends get request to api and stores data in "posts" state
@@ -39,31 +42,15 @@ const App = () => {
       })
   }
 
-
-  ////// USER AUTH /////
-
-  const handleSignUp = (e) => {
-    
-  }
-
-  const submitLogIn = (e) => {
-    e.preventDefault()
-  }
-
-  const testFunc = () => {
-    alert(test);
-  }
-
-
   useEffect(() => {
 
     getPosts()
-    setCurrentUser({username: localStorage.getItem('username'), rep: localStorage.getItem('rep')})
+    
   }, [])
 
   return (
     <>
-      <Header submitLogIn={submitLogIn}/>
+      <Header />
       <SearchBar />
       <div className="container flex flex-wrap justify-between md:justify-around w-3/4 h-full m-auto mt-10">
         {
