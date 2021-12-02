@@ -9,12 +9,13 @@ const Header = ({submitLogIn}) => {
      const [ profileIconClicked, setProfileIconClicked ] = useState(false);
      const [ currentUser, setCurrentUser ] = useState(useLocalStorage("currentUser"));
 
-
+     // if profile icon clicked 
      const handleProfileIconClicked = () => {
           setProfileIconClicked(!profileIconClicked);
           console.log(submitLogIn)
      }
 
+     // clear currentSession by emptying the local storage
      const handleLogout = () => {
           setCurrentUser()
           localStorage.clear()
