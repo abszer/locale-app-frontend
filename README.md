@@ -12,6 +12,11 @@
 - Created formatter for tags
 - Created sign in page and create post routes and preliminary pages
 
+## Day 8
+- Had trouble getting react router to lift state thru <Link> component. Going to try using session local storage instead
+- Implemented local storage to save currentSession
+
+
 ## Attributions
 - Ecommerce Icons made by feen from https://www.flaticon.com/authors/feen
 - Icons made by Freepik from www.flaticon.com/Freepik

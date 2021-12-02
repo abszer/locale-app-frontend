@@ -4,12 +4,17 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Card from './components/Card';
 import Footer from './components/Footer';
+import useLocalStorage from './useLocalStorage';
+
+
 
 const App = () => {
   // const emptyPost = { postId: '', title: '', date: '', image: '', location: '', upvVotes: '', downVotes: '', author: '', tags: ''}
   
   const [posts, setPosts] = useState([]);
-  const [currentSession, setCurrentSession] = useState('');
+  const [currentUser, setCurrentUser] = useState(useLocalStorage("currentUser"));
+  const [currentUserRep, setCurrentUserRep] = useState(useLocalStorage("currentUserRep"));
+  const [footerHidden, setFooterHidden] = useState(false);
 
   
   // sends get request to api and stores data in "posts" state
@@ -39,9 +44,14 @@ const App = () => {
       })
   }
 
+  const handleImgOnClick = () => {
+      setFooterHidden(!footerHidden)
+  }
 
   useEffect(() => {
+
     getPosts()
+    
   }, [])
 
   return (
@@ -52,12 +62,13 @@ const App = () => {
         {
           posts.map((post) => {
             return (
-              <Card post={post} handleUpVote={handleUpVote} handleDownVote={handleDownVote} key={post.postId}/>
+              <Card post={post} handleUpVote={handleUpVote} handleImgOnClick={handleImgOnClick} handleDownVote={handleDownVote} key={post.postId}/>
             )
           })
         }
       </div>
-      <Footer />
+      {/* show footer if footerHidden is false */}
+      { !footerHidden && <Footer /> }
     </>
   )
 }
