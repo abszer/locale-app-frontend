@@ -8,17 +8,20 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick }) => {
      const [ formattedTags, setFormattedTags ] = useState([]);
      const [ imageEnlarged, setImageEnlarged] = useState(false)
 
+     // uses ' ; ' as a delimeter to separate tags into an array (max 6)
      const createFormattedTags = (tags) => {
           const tagArr = tags.split(';');
           if(tagArr.length < 5){
                setFormattedTags(tagArr);
           } else {
-               setFormattedTags(tagArr.slice(0, 4));
+               setFormattedTags(tagArr.slice(0, 6));
           } 
      }
 
+     // enlarges image and hides footer by calling handleImageOnClick in app.js
      const handleOnClick = () => {
           setImageEnlarged(!imageEnlarged)
+          handleImgOnClick()
      }
      
      useEffect(() => {
@@ -47,6 +50,7 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick }) => {
                          </div>
                          <div className="tag-container flex flex-row flex-wrap justify-end gap-2 w-3/4">
                          {
+                              // display tags
                               formattedTags.map((tag, index) => {
                                    return (
                                         <div key={index} className="select-none tag bg-blue-100 pl-1 pr-1 shadow-md rounded-sm hover:bg-blue-200 cursor-pointer">

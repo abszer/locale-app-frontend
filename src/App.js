@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import useLocalStorage from './useLocalStorage';
 
 
+
 const App = () => {
   // const emptyPost = { postId: '', title: '', date: '', image: '', location: '', upvVotes: '', downVotes: '', author: '', tags: ''}
   
@@ -43,6 +44,10 @@ const App = () => {
       })
   }
 
+  const handleImgOnClick = () => {
+      setFooterHidden(!footerHidden)
+  }
+
   useEffect(() => {
 
     getPosts()
@@ -57,12 +62,13 @@ const App = () => {
         {
           posts.map((post) => {
             return (
-              <Card post={post} handleUpVote={handleUpVote} handleDownVote={handleDownVote} key={post.postId}/>
+              <Card post={post} handleUpVote={handleUpVote} handleImgOnClick={handleImgOnClick} handleDownVote={handleDownVote} key={post.postId}/>
             )
           })
         }
       </div>
-      <Footer />
+      {/* show footer if footerHidden is false */}
+      { !footerHidden && <Footer /> }
     </>
   )
 }
