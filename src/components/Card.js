@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BiUpvote } from 'react-icons/bi'
 import { BiDownvote } from 'react-icons/bi'
+import { GrMapLocation } from 'react-icons/gr';
 import ImageModal from './ImageModal'
 
 
@@ -30,12 +31,12 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick }) => {
 
      return (
           // transform transition-all duration-300 hover:scale-105 hover:shadow-xl
-          <div className="select-none flex flex-col items-center bg-gray-50 rounded-md mt-2 mb-5 shadow-md w-full md:w-72 border">
-               <img onClick={handleOnClick} className="object-cover cursor-pointer rounded-tr-md rounded-tl-md w-full h-64" src={post.image} alt="post" />
+          <div className="select-none flex flex-col items-center bg-gray-200 rounded-md mt-2 mb-5 shadow-md w-full md:w-72 border">
+               <img onClick={handleOnClick} className="object-cover cursor-pointer rounded-tr-md  rounded-tl-md w-full h-64 mb-1" src={post.image} alt="post" />
                <div className="bot-bar mt-0.5 bg-white rounded-bl-md rounded-br-md w-full">
                     <div className="title-location flex flex-col items-center pb-2 border-b w-3/4 m-auto">
                          <p className="font-heading antialiased text-lg text-black">{post.title}</p>
-                         <p className="font-body text-xs text-gray-700">{post.location}</p>
+                         <p className="flex justify-center items-center gap-2 font-body text-xs text-blue-700 hover:text-blue-900 cursor-pointer"><GrMapLocation />{post.location}</p>
                     </div>
                     <div className="votes-date flex w-full items-center justify-between pl-3 pr-3">
                          <div className="flex flex-col">
