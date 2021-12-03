@@ -14,14 +14,13 @@ const Header = ({submitLogIn}) => {
      // if profile icon clicked 
      const handleProfileIconClicked = () => {
           setProfileIconClicked(!profileIconClicked);
-          console.log(submitLogIn)
      }
 
      // clear currentSession by emptying the local storage
      const handleLogout = () => {
           setCurrentUser("")
           localStorage.clear()
-          console.log(currentUser)
+          setProfileIconClicked(!profileIconClicked)
      }
 
      useEffect(() => {
@@ -46,7 +45,6 @@ const Header = ({submitLogIn}) => {
                {/* this menu will appear when a user is logged in */}
      
                {
-                    // for some 
                     currentUser &&
                     <div className={ profileIconClicked ? "flex flex-col justify-around items-center login-signup h-44 w-40 bg-gray-50 absolute top-16 right-3 rounded-md shadow-md" : "hidden"}>
                          <button className="select-none bg-blue-400 hover:bg-blue-500 text-lg text-white font-bold w-3/4 h-1/5 rounded-md"><Link to={"/login"} >Profile</Link></button>
