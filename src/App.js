@@ -44,9 +44,35 @@ const App = () => {
       })
   }
 
+  //sends put request to server when edit is confirmed
+  const handleEditOnSubmit = (e, postId, body) => {
+    e.preventDefault();
+    axios.put("https://localeapi.azurewebsites.net/api/posts/" + postId, body)
+        .then((response) => {
+          console.log(response)
+          getPosts()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+  }
+
+  // deletes post but retains image on server
+  const handlePostOnDelete = (postId) => {
+    axios.delete("https://localeapi.azurewebsites.net/api/posts/" + postId)
+    .then((response) => {
+      console.log(response)
+      getPosts()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   const handleImgOnClick = () => {
       setFooterHidden(!footerHidden)
   }
+
 
   useEffect(() => {
 
@@ -62,7 +88,7 @@ const App = () => {
         {
           posts.map((post) => {
             return (
-              <Card post={post} handleUpVote={handleUpVote} handleImgOnClick={handleImgOnClick} handleDownVote={handleDownVote} key={post.postId}/>
+              <Card post={post} handleUpVote={handleUpVote} handleImgOnClick={handleImgOnClick} handleDownVote={handleDownVote} handleEditOnSubmit={handleEditOnSubmit} handlePostOnDelete={handlePostOnDelete} key={post.postId}/>
             )
           })
         }

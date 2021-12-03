@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 import useLocalStorage from '../useLocalStorage';
 
@@ -14,6 +15,7 @@ const CreatePostForm = () => {
      const [suggestedLocation, setSuggestedLocation] = useState("")
      const [body, setBody] = useState(emptyBody)
      const [dropDownVisible, setDropDownVisible] = useState(false)
+     const [redirect, setRedirect] = useState(false) // when post is submitted this becomes true
 
      useEffect(() => {
           setBody({...body, "author": currentUser});
@@ -102,7 +104,7 @@ const CreatePostForm = () => {
           <div className="flex flex-col items-center bg-blue-100 h-80 w-96 shadow-lg rounded-xl pb-5">
                <h2 className="mt-5 text-2xl font-bold">Share your Locale!</h2>
                <h4 className="text-sm font-body">Post a spot worth sharing.</h4>
-               <form autoComplete="off" onSubmit={handlePostSubmit} className="flex flex-col items-center h-60 justify-evenly w-full pl-2 pr-2">
+               <form autoComplete="off" onSubmit={(e)=>{ handlePostSubmit(e); setTimeout(()=>{setRedirect(!redirect);}, 1000)}} className="flex flex-col items-center h-60 justify-evenly w-full pl-2 pr-2">
                     
                     <input type="text" name="title" className="text-center w-full h-7 rounded-md" placeholder="Title: Amazing hiking trail" value={body.title} onChange={handleOnChange}/>
                     
@@ -119,6 +121,8 @@ const CreatePostForm = () => {
                     <input type="submit" value="Upload" className="transition-all bg-blue-400 hover:bg-blue-500 text-gray-50 w-20 rounded-md shadow mr-4 cursor-pointer"/>
                </form> }
           </div>
+          {redirect && <Navigate to={"/"} />}
+          
           </>
      )
 }
