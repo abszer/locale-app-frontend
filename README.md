@@ -21,8 +21,13 @@
 ## Day 9
 - Added ability for file to be uploaded and downloaded from the server 
 - Added minor styling changes to card
-- Making create form 
+- Made create form 
 
+## Day 10
+- Address Auto Complete
+- Edit Funcitionality
+- Google Maps Integration
+- Search bar functionality
 
 ## Attributions
 - Ecommerce Icons made by feen from https://www.flaticon.com/authors/feen
