@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useLocalStorage from '../useLocalStorage';
 
@@ -10,17 +10,33 @@ const CreatePostForm = (params) => {
      const [imageURL, setImageURL] = useState("");
      const [imageFile, setImageFile] = useState();
      const [currentUser, setCurrentUser] = useLocalStorage("currentUser");
-     const [locationPlaceholder, setLocationPlaceholder] = useState() // holds value of location but to set location in req body requires autocomplete drop down to be clicked
+     const [locationPlaceholder, setLocationPlaceholder] = useState("") // holds value of location but to set location in req body requires autocomplete drop down to be clicked
+     const [suggestedLocation, setSuggestedLocation] = useState("")
      const [body, setBody] = useState(emptyBody)
      const [dropDownVisible, setDropDownVisible] = useState(false)
+
+     useEffect(() => {
+          setBody({...body, "author": currentUser});
+     }, [currentUser])
 
      const handleFileOnChange = (e) => {
           setImageFile(e.target.files['0']);
      }
 
+    
      // need to add way to add "author" and image field to body
      const handlePostSubmit = (e) => {
           e.preventDefault();
+          
+          axios.post("https://localeapi.azurewebsites.net/api/posts", body)
+               .then((response) => {
+                    console.log(response.data)
+               })
+               .catch((err) => {
+                    console.log(err)
+               });
+          
+          
 
      }
 
@@ -30,6 +46,27 @@ const CreatePostForm = (params) => {
 
      const handleLocationOnChange = (e) => {
           setLocationPlaceholder(e.target.value)
+
+          const options = {
+               method: 'GET',
+               url: 'https://address-completion.p.rapidapi.com/v1/geocode/autocomplete',
+               params: {text: locationPlaceholder, limit: '1', lang: 'en'},
+               headers: {
+                 'x-rapidapi-host': 'address-completion.p.rapidapi.com',
+                 'x-rapidapi-key': '4d5a574ef8msh0077390e7368a25p1522f0jsnea4a0af1cc8a'
+               }
+          };
+
+          // only make requests from the API if user types more than 2 characters because I'm cheap and poor
+          if(locationPlaceholder.length > 2){
+               axios.request(options).then(function (response) {
+                    console.log(response.data);
+                    setSuggestedLocation(response.data.features[0].properties.address_line1)
+               }).catch(function (error) {
+                    console.error(error);
+               });
+          }
+
      }
 
      const handleLocationOnKeyDown = (e) => {
@@ -41,7 +78,9 @@ const CreatePostForm = (params) => {
      }
 
      const handleLocationDropDownOnClick = () => {
-          
+          setLocationPlaceholder(suggestedLocation)
+          setBody({...body, location: suggestedLocation})
+          setDropDownVisible(false)
      }
 
      const handleImageUpload = (e) => {
@@ -50,11 +89,11 @@ const CreatePostForm = (params) => {
           formData.append("file", imageFile);
           console.log(formData)
 
-          axios.post("https://localhost:7047/upload", formData) // CHANGE THIS FOR PRODUCTION
+          axios.post("https://localeapi.azurewebsites.net/upload", formData) // CHANGE THIS FOR PRODUCTION
                .then((response) => {
                     console.log(response.data)
-                    setImageURL("https://localhost:7047/upload/" + response.data) // CHANGE THIS FOR PRODUCTION
-                    setBody({...body, image: "https://localhost:7047/upload/" + response.data}) // CHANGE THIS FOR PRODUCTION
+                    setImageURL("https://localeapi.azurewebsites.net/upload/" + response.data) // CHANGE THIS FOR PRODUCTION
+                    setBody({...body, image: "https://localeapi.azurewebsites.net/upload/" + response.data}) // CHANGE THIS FOR PRODUCTION
                })
      }
 
@@ -69,8 +108,8 @@ const CreatePostForm = (params) => {
                     <input type="text" name="title" className="text-center w-full h-7 rounded-md" placeholder="Title: Amazing hiking trail" value={body.title} onChange={handleOnChange}/>
                     
                     <input type="text" name="location" placeholder="Locatation: San Antonio, TX" className="text-center w-full h-7 rounded-md" value={locationPlaceholder} onChange={handleLocationOnChange} onKeyDown={(e)=>{handleLocationOnKeyDown(e)}}/>
-                    <div onClick={null} className={"relative bg-gray-50 hover:bg-gray-200 w-full h-7 -mt-4 text-center rounded-b-md cursor-pointer " + (dropDownVisible ? "" : "hidden")}>
-                         <p className="">test</p>
+                    <div onClick={handleLocationDropDownOnClick} className={"relative bg-white hover:bg-gray-200 w-full h-7 -mt-4 text-center rounded-b-md cursor-pointer " + (dropDownVisible ? "" : "hidden")}>
+                         <p className="">{suggestedLocation}</p>
                     </div>                    
                     <input type="text" name="tags" placeholder="Tags (;): sunny;outdoors;texas" className="w-full text-center h-7 rounded-md" value={body.tags} onChange={handleOnChange}/>
                     <input type="hidden" name="author" value={currentUser}/>
