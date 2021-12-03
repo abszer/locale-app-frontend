@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { BiUpvote } from 'react-icons/bi'
 import { BiDownvote } from 'react-icons/bi'
 import { GrMapLocation } from 'react-icons/gr';
+import { FiEdit } from 'react-icons/fi'
+import useLocalStorage from '../useLocalStorage';
 import ImageModal from './ImageModal'
 
 
@@ -9,6 +11,7 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick }) => {
      const [ formattedTags, setFormattedTags ] = useState([]);
      const [ imageEnlarged, setImageEnlarged] = useState(false)
      const [ postTitleColor, setPostTitleColor ] = useState("")
+     const [currentUser, setCurrentUser] = useLocalStorage("currentUser")
 
      // uses ' ; ' as a delimeter to separate tags into an array (max 6)
      const createFormattedTags = (tags) => {
@@ -35,6 +38,7 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick }) => {
      useEffect(() => {
           createFormattedTags(post.tags);
           determineTitleColor(post.upVotes, post.downVotes);
+
      }, [post.tags, post.upVotes, post.downVotes])
 
      return (
@@ -42,6 +46,7 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick }) => {
           <div className="select-none flex flex-col items-center bg-gray-200 rounded-md mt-2 mb-5 shadow-md w-full md:w-72 border">
                <img onClick={handleOnClick} className="object-cover cursor-pointer rounded-tr-md  rounded-tl-md w-full h-64 mb-1" src={post.image} alt="post" />
                <div className="bot-bar mt-0.5 bg-white rounded-bl-md rounded-br-md w-full">
+                    {(currentUser && currentUser == post.author) ? <h3 onClick={()=>{alert("this is where edit will go")}} className="flex flex-row-reverse relative right-2 top-2 -mb-2 cursor-pointer hover:text-gray-700">< FiEdit /></h3> : null}
                     <div className="title-location flex flex-col items-center pb-2 border-b w-3/4 m-auto">
                          <p className={"font-heading antialiased text-lg " + postTitleColor}>{post.title}</p>
                          <p className="flex justify-center items-center gap-2 font-body text-xs text-blue-700 hover:text-blue-900 cursor-pointer"><GrMapLocation />{post.location}</p>
