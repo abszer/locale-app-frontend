@@ -3,7 +3,7 @@ import axios from 'axios';
 import useLocalStorage from '../useLocalStorage';
 
 
-const CreatePostForm = (params) => {
+const CreatePostForm = () => {
 
      const emptyBody = {title: '', image: '', location: '', author: '', tags: '' }
 
@@ -36,7 +36,6 @@ const CreatePostForm = (params) => {
                     console.log(err)
                });
           
-          
 
      }
 
@@ -53,7 +52,7 @@ const CreatePostForm = (params) => {
                params: {text: locationPlaceholder, limit: '1', lang: 'en'},
                headers: {
                  'x-rapidapi-host': 'address-completion.p.rapidapi.com',
-                 'x-rapidapi-key': '4d5a574ef8msh0077390e7368a25p1522f0jsnea4a0af1cc8a'
+                 'x-rapidapi-key': process.env.REACT_APP_ADDRESS_COMPLETE_API_KEY
                }
           };
 
