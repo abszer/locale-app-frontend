@@ -15,6 +15,13 @@
 ## Day 8
 - Had trouble getting react router to lift state thru <Link> component. Going to try using session local storage instead
 - Implemented local storage to save currentSession
+- Added ability to enlarge image by clicking it
+- Added minor styling changes to card 
+
+## Day 9
+- Added ability for file to be uploaded and downloaded from the server 
+- Added minor styling changes to card
+- Making create form 
 
 
 ## Attributions

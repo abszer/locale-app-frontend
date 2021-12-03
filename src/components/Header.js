@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import { MdShareLocation } from 'react-icons/md';
@@ -17,11 +17,14 @@ const Header = ({submitLogIn}) => {
 
      // clear currentSession by emptying the local storage
      const handleLogout = () => {
-          setCurrentUser()
+          setCurrentUser("")
           localStorage.clear()
-          localStorage.removeItem("currentUser")
-          localStorage.removeItem("currentUserRep")
+          console.log(currentUser)
      }
+
+     useEffect(() => {
+          console.log(currentUser)
+     })
 
      return (
           <header className="bg-red-500 shadow-lg rounded-b-md flex justify-between sticky h-16 top-0 z-10">
@@ -33,18 +36,21 @@ const Header = ({submitLogIn}) => {
                <h3 onClick={handleProfileIconClicked} className="text-3xl self-center text-gray-50 hover:text-gray-300 mr-3 cursor-pointer"><CgProfile /></h3>
                
                {/* this menu appears when a user is not logged in */}
-               <div className={ profileIconClicked && !currentUser ? "flex flex-col justify-around items-center login-signup h-44 w-40 bg-gray-50 absolute top-16 right-3 rounded-md shadow-md" : "hidden"}>
+               <div className={ profileIconClicked && !currentUser[0] ? "flex flex-col justify-around items-center login-signup h-44 w-40 bg-gray-50 absolute top-16 right-3 rounded-md shadow-md" : "hidden"}>
                     <button className="select-none bg-blue-400 hover:bg-blue-500 text-lg text-white font-bold w-3/4 h-1/5 rounded-md"><Link to={"/login"} >Sign In</Link></button>
                    <button className="select-none bg-blue-400 hover:bg-blue-500 text-lg text-white font-bold w-3/4 h-1/5 rounded-md"> <Link to={"/signup"}>Sign Up</Link></button>
                </div>
 
                {/* this menu will appear when a user is logged in */}
+     
                {
-                    currentUser !== "" &&
+          
+                    currentUser[0] ?
                     <div className={ profileIconClicked && currentUser ? "flex flex-col justify-around items-center login-signup h-44 w-40 bg-gray-50 absolute top-16 right-3 rounded-md shadow-md" : "hidden"}>
                          <button className="select-none bg-blue-400 hover:bg-blue-500 text-lg text-white font-bold w-3/4 h-1/5 rounded-md"><Link to={"/login"} >Profile</Link></button>
                          <button onClick={handleLogout} className="select-none bg-blue-400 hover:bg-blue-500 text-lg text-white font-bold w-3/4 h-1/5 rounded-md">Logout</button>
                     </div>
+                    : null
                }
           </header>
      )

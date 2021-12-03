@@ -12,8 +12,8 @@ const App = () => {
   // const emptyPost = { postId: '', title: '', date: '', image: '', location: '', upvVotes: '', downVotes: '', author: '', tags: ''}
   
   const [posts, setPosts] = useState([]);
-  const [currentUser, setCurrentUser] = useState(useLocalStorage("currentUser"));
-  const [currentUserRep, setCurrentUserRep] = useState(useLocalStorage("currentUserRep"));
+  const [currentUser, setCurrentUser] = useState();
+  const [currentUserRep, setCurrentUserRep] = useState();
   const [footerHidden, setFooterHidden] = useState(false);
 
   
