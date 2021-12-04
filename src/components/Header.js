@@ -37,7 +37,7 @@ const Header = ({submitLogIn}) => {
                </div>
                <div className="flex flex-col self-center">
                     <h3 onClick={handleProfileIconClicked} className="text-3xl self-center text-gray-50 hover:text-gray-300 mr-3 cursor-pointer"><CgProfile /></h3>
-                    <h3 className="text-gray-50 mr-3">{currentUser && (currentUser + ": " + currentUserRep)}</h3>
+                    <h3 className="text-gray-50 self-center mr-3">{currentUser && "" + currentUser}</h3>
                </div>
                
                

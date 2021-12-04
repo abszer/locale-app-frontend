@@ -12,9 +12,9 @@ const App = () => {
   // const emptyPost = { postId: '', title: '', date: '', image: '', location: '', upvVotes: '', downVotes: '', author: '', tags: ''}
   
   const [posts, setPosts] = useState([]);
-  const [currentUser, setCurrentUser] = useState();
-  const [currentUserRep, setCurrentUserRep] = useState();
+  const [currentUser, setCurrentUser] = useLocalStorage("currentUser");
   const [footerHidden, setFooterHidden] = useState(false);
+  const [searchResults, setSearchResults] = useState([])
 
   
   // sends get request to api and stores data in "posts" state
@@ -28,20 +28,27 @@ const App = () => {
 
   // sends put request to api and increments upvotes by 1
   const handleUpVote = (post) => {
-    axios.put("https://localeapi.azurewebsites.net/api/posts/" + post.postId, {...post, 'upVotes': post.upVotes + 1 })
+    
+    if(currentUser){
+      axios.put("https://localeapi.azurewebsites.net/api/posts/" + post.postId, {...post, 'upVotes': post.upVotes + 1 })
       .then((response) => {
         getPosts()
         console.log(response.data)
       })
+    }
+    
   }
 
   // sends put request to api and decrements downvotes by 1
   const handleDownVote = (post) => {
-    axios.put("https://localeapi.azurewebsites.net/api/posts/" + post.postId, {...post, 'downVotes': post.downVotes - 1 })
+    if(currentUser){
+      axios.put("https://localeapi.azurewebsites.net/api/posts/" + post.postId, {...post, 'downVotes': post.downVotes - 1 })
       .then((response) => {
         getPosts()
         console.log(response.data)
       })
+    }
+    
   }
 
   //sends put request to server when edit is confirmed
@@ -69,6 +76,7 @@ const App = () => {
     })
   }
 
+
   const handleImgOnClick = () => {
       setFooterHidden(!footerHidden)
   }
@@ -83,12 +91,14 @@ const App = () => {
   return (
     <>
       <Header />
-      <SearchBar />
+      <SearchBar setSearchResults={setSearchResults} posts={posts} />
       <div className="container flex flex-wrap justify-between md:justify-around w-3/4 h-full m-auto mt-10">
         {
-          posts.map((post) => {
+          posts.map((post, index) => {
+            
             return (
-              <Card post={post} handleUpVote={handleUpVote} handleImgOnClick={handleImgOnClick} handleDownVote={handleDownVote} handleEditOnSubmit={handleEditOnSubmit} handlePostOnDelete={handlePostOnDelete} key={post.postId}/>
+              (searchResults[index] === 1 || searchResults.length === 0) &&
+              <Card index={index} searchResults={searchResults} post={post} handleUpVote={handleUpVote} handleImgOnClick={handleImgOnClick} handleDownVote={handleDownVote} handleEditOnSubmit={handleEditOnSubmit} handlePostOnDelete={handlePostOnDelete} key={post.postId}/>
             )
           })
         }

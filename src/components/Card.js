@@ -71,7 +71,7 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick, handleEdit
                     {(currentUser && (currentUser === post.author || currentUser === "rob")) ? <h3 onClick={handleEditIconOnClick} className="flex flex-row-reverse relative right-2 top-2 -mb-2 cursor-pointer hover:text-gray-700">< FiEdit /></h3> : null}
                     <div className="title-location flex flex-col items-center pb-2 border-b w-3/4 m-auto">
                          <p className={"font-heading antialiased text-lg " + postTitleColor}>{post.title}</p>
-                         <p className="flex justify-center items-center gap-2 font-body text-xs text-blue-700 hover:text-blue-900 cursor-pointer"><GrMapLocation />{post.location}</p>
+                         <a onClick={()=>{ window.location.href="https://www.google.com/maps/search/?api=1&query=" + post.location.split(" ").join("+") }} className="flex justify-center items-center gap-2 font-body text-xs text-blue-700 hover:text-blue-900 cursor-pointer"><GrMapLocation />{post.location}</a>
                     </div>
                     <div className="votes-date flex w-full items-center justify-between pl-3 pr-3">
                          <div className="flex flex-col">
