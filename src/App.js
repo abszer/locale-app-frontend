@@ -98,7 +98,7 @@ const App = () => {
             
             return (
               (searchResults[index] === 1 || searchResults.length === 0) &&
-              <Card index={index} searchResults={searchResults} post={post} handleUpVote={handleUpVote} handleImgOnClick={handleImgOnClick} handleDownVote={handleDownVote} handleEditOnSubmit={handleEditOnSubmit} handlePostOnDelete={handlePostOnDelete} key={post.postId}/>
+              <Card post={post} handleUpVote={handleUpVote} handleImgOnClick={handleImgOnClick} handleDownVote={handleDownVote} handleEditOnSubmit={handleEditOnSubmit} handlePostOnDelete={handlePostOnDelete} key={post.postId}/>
             )
           })
         }

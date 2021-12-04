@@ -8,6 +8,7 @@ import ImageModal from './ImageModal'
 
 
 const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick, handleEditOnSubmit, handlePostOnDelete }) => {
+
      const presetBody = {title: post.title, image: post.image, location: post.location, author: post.author, tags: post.tags, upVotes: post.upVotes, downVotes: post.downVotes }
      
      const [ formattedTags, setFormattedTags ] = useState([]);
@@ -89,7 +90,7 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick, handleEdit
                               // display tags
                               formattedTags.map((tag, index) => {
                                    return (
-                                        <div key={index} className="select-none tag bg-blue-100 pl-1 pr-1 shadow-md rounded-sm hover:bg-blue-200 cursor-pointer">
+                                        <div key={index} className="select-none tag bg-blue-100 pl-1 pr-1 shadow-md rounded-sm">
                                              <p>{tag}</p>
                                         </div>
                                    )

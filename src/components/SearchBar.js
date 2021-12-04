@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 
-const SearchBar = ({ posts, setSearchResults }) => {
+const SearchBar = ({ posts, setSearchResults}) => {
 
      const [searchIconVisible, setSearchIconVisible] = useState(true);
      const [searchQuery, setSearchQuery] = useState("")
@@ -25,18 +25,19 @@ const SearchBar = ({ posts, setSearchResults }) => {
 
      const handleSearchOnChange = (e) => {
           setSearchQuery(e.target.value)
-          let matchedPosts = posts.map((post) => {
+          const matchedPosts = posts.map((post) => {
                if(post.tags.includes(searchQuery)){
                     return 1
-               }else if(post.title.toLowerCase().includes(searchQuery)){
-                    return 1
-               }else{
+               }
+               // else if(post.title.toLowerCase().includes(searchQuery)){
+               //      return 1
+               // }
+               else{
                     return 0
                }
           })
           setSearchResults(matchedPosts)
-     }
-     
+     }     
 
      return (
           // sticky top-20
