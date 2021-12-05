@@ -6,6 +6,7 @@ import App from './App';
 import NewPost from './routes/newpost';
 import LoginForm from './routes/login';
 import SignUpForm from './routes/signup';
+import UserProfile from './routes/userprofile';
 import reportWebVitals from './reportWebVitals';
 
 
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Route path="/newpost" element={<NewPost />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/userprofile" element={<UserProfile />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
