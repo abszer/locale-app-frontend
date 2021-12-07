@@ -65,7 +65,7 @@ const UserProfile = () => {
           <div className="flex justify-evenly items-center w-full">
           <div className="flex flex-col items-center">
           <p className="text-5xl text-red-400"><MdShareLocation /></p>
-          <p className="mt-3">{totalPosts}</p>
+          <p className="mt-2 pb-1">{totalPosts}</p>
           </div>
           
           <div className="flex flex-col items-center">

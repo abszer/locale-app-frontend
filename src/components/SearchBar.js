@@ -26,7 +26,7 @@ const SearchBar = ({ posts, setSearchResults}) => {
      const handleSearchOnChange = (e) => {
           setSearchQuery(e.target.value)
           const matchedPosts = posts.map((post) => {
-               if(post.tags.includes(searchQuery)){
+               if(post.tags.includes(searchQuery.toLowerCase())){
                     return 1
                }
                // else if(post.title.toLowerCase().includes(searchQuery)){
@@ -39,10 +39,14 @@ const SearchBar = ({ posts, setSearchResults}) => {
           setSearchResults(matchedPosts)
      }     
 
+     const handleSubmit = (e) => {
+          e.preventDefault();
+     }
+
      return (
           // sticky top-20
           <div className="search-bar">
-               <form autoComplete="off" onSubmit={null} className="search-bar flex justify-center mt-3 relative w-screen">
+               <form autoComplete="off" onSubmit={handleSubmit} className="search-bar flex justify-center mt-3 relative w-screen">
                     <FaSearch className={ !searchIconVisible ? "hidden" : "absolute top-1.5 left-1/4 text-gray-400"}/>
                     <input id="search" placeholder="Search by tag" onKeyDown={searchIconOnKeyPress} onChange={handleSearchOnChange} value={searchQuery} className="rounded-full border border-gray-200 shadow-md w-3/5 text-center focus:outline-none focus:ring-2 focus:ring-blue-400" type="text"/>
                </form>
