@@ -34,7 +34,7 @@ const SignUpForm = () => {
                     <h3 className="mt-5 text-2xl font-bold">Hey There!</h3>
                     <h5 className="text-sm font-body">Go ahead and sign up here.</h5>
                     <div className="mt-5 w-3/4">
-                         <input type="text" name="username" onChange={handleOnChange} placeholder="Email / Username" className="rounded-md h-8 w-full pl-3 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                         <input type="text" name="username" onChange={handleOnChange} placeholder="Username" className="rounded-md h-8 w-full pl-3 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
                     </div>
                     <div className="mt-5 w-3/4">
                          <input type="password" name="password" onChange={handleOnChange} placeholder="Password" className="rounded-md h-8 w-full pl-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />

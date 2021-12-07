@@ -40,7 +40,7 @@ const LoginForm = () => {
                     <h3 className="mt-5 text-2xl font-bold">Welcome Back!</h3>
                     {!loginFailed ? <h5 className="text-sm font-body">Go ahead and login here.</h5> : <h5 className="text-sm font-body text-red-600">Incorrect username or password</h5>}
                     <div className="mt-5 w-3/4">
-                         <input type="text" name="username" placeholder="Email / Username" onChange={handleOnChange} value={body.username} className="rounded-md h-8 w-full pl-3 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                         <input type="text" name="username" placeholder="Username" onChange={handleOnChange} value={body.username} className="rounded-md h-8 w-full pl-3 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
                     </div>
                     <div className="mt-5 w-3/4">
                          <input type="password" name="password" placeholder="Password" onChange={handleOnChange} value={body.password} className="rounded-md h-8 w-full pl-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
