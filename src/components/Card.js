@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { BiUpvote } from 'react-icons/bi'
 import { BiDownvote } from 'react-icons/bi'
 import { GrMapLocation } from 'react-icons/gr';
@@ -71,7 +72,7 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick, handleEdit
                <div className="bot-bar mt-0.5 bg-white rounded-bl-md rounded-br-md w-full">
                     {(currentUser && (currentUser === post.author || currentUser === "rob")) ? <h3 onClick={handleEditIconOnClick} className="flex flex-row-reverse relative right-2 top-2 -mb-2 cursor-pointer hover:text-gray-700">< FiEdit /></h3> : null}
                     <div className="title-location flex flex-col items-center pb-2 border-b w-3/4 m-auto">
-                         <p className="absolute self-start -ml-8 mt-1 text-xs text-blue-400">{post.author}</p>
+                         <p className="absolute self-start -ml-8 mt-1 text-xs text-blue-400 hover:text-blue-500 cursor-pointer"><Link to={"/userprofile"} state={{selectedUserProfile: post.author}}>{post.author}</ Link></p>
                          <p className={"font-heading antialiased text-lg " + postTitleColor}>{post.title}</p>
                          <a onClick={()=>{ window.location.href="https://www.google.com/maps/search/?api=1&query=" + post.location.split(" ").join("+") }} className="flex justify-center items-center gap-2 font-body text-xs text-blue-700 hover:text-blue-900 cursor-pointer"><GrMapLocation />{post.location}</a>
                     </div>

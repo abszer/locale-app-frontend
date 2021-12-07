@@ -52,7 +52,7 @@ const Header = ({submitLogIn}) => {
                {
                     currentUser &&
                     <div className={ profileIconClicked ? "flex flex-col justify-around items-center login-signup h-44 w-40 bg-gray-50 absolute top-16 right-3 rounded-md shadow-md" : "hidden"}>
-                         <button className="select-none bg-blue-400 hover:bg-blue-500 text-lg text-white font-bold w-3/4 h-1/5 rounded-md"><Link to={"/userprofile"} >Profile</Link></button>
+                         <button className="select-none bg-blue-400 hover:bg-blue-500 text-lg text-white font-bold w-3/4 h-1/5 rounded-md"><Link to={"/userprofile"} state={{selectedUserProfile: currentUser}}>Profile</Link></button>
                          <button onClick={handleLogout} className="select-none bg-blue-400 hover:bg-blue-500 text-lg text-white font-bold w-3/4 h-1/5 rounded-md">Logout</button>
                     </div>
                     
