@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import { MdShareLocation } from 'react-icons/md';
@@ -10,7 +10,8 @@ const Header = ({submitLogIn}) => {
 
      // REFACTOR:
      const [ currentUser, setCurrentUser ] = useLocalStorage("currentUser");
-     const [ currentUserRep, setCurrentUserRep] = useLocalStorage("currentUserRep")
+     // const [ currentUserRep, setCurrentUserRep] = useLocalStorage("currentUserRep") // unused at the moment
+
 
      // if profile icon clicked 
      const handleProfileIconClicked = () => {
@@ -24,12 +25,8 @@ const Header = ({submitLogIn}) => {
           setProfileIconClicked(!profileIconClicked)
      }
 
-     useEffect(() => {
-          console.log(currentUser)
-     })
-
      return (
-          <header className="bg-red-500 shadow-lg rounded-b-md flex justify-between sticky h-16 top-0 z-10">
+          <header className="bg-red-500 shadow-lg rounded-b-md flex justify-between sticky h-16 top-0 z-20">
                <div className="logo flex">
                <p className="text-3xl self-center text-gray-50 ml-3"><MdShareLocation /></p>
                     <Link to="/"><p className="text-gray-50 hover:text-gray-200 cursor-pointer text-6xl font-logo subpixel-antialiased ml-3">Locale</p></Link>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import { Navigate } from 'react-router-dom';
-import useLocalStorage from "../useLocalStorage";
 import axios from 'axios';
 
 const SignUpForm = () => {

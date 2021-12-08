@@ -7,6 +7,7 @@ const LoginForm = () => {
      const [body, setBody] = useState({username: '', password: ''})
      const [loginFailed, setLoginFailed] = useState(false)
      const [currentUser, setCurrentUser] = useState('')
+     const [ submitStatus, setSubmitStatus ] = useState(false)
 
      const handleOnChange = (e) => {
           setBody({...body, [e.target.name]: e.target.value})
@@ -14,15 +15,18 @@ const LoginForm = () => {
 
      const onSubmit = (e) => {
           e.preventDefault()
+          setSubmitStatus(!submitStatus)
           axios.post('https://localeapi.azurewebsites.net/api/userauth', body)
                .then((response) => {
                     if(typeof response.data == "string"){
                          setLoginFailed(true);
+                         setSubmitStatus(false)
                     }else{
                
                          localStorage.setItem("currentUser", response.data[0].username)
                          localStorage.setItem("currentUserRep", response.data[0].rep)
                          setCurrentUser(localStorage.getItem("currentUser"))
+                         setSubmitStatus(!submitStatus)
                     }
                     
                })
@@ -30,6 +34,7 @@ const LoginForm = () => {
                     console.log(err)
                     alert("There was an unexpected error!")
                })
+
      }
 
      return (
@@ -45,7 +50,7 @@ const LoginForm = () => {
                     <div className="mt-5 w-3/4">
                          <input type="password" name="password" placeholder="Password" onChange={handleOnChange} value={body.password} className="rounded-md h-8 w-full pl-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
                     </div>
-                    <input type="submit" value="Sign in" className="mt-5 w-3/4 h-8 cursor-pointer rounded-md text-gray-100 font-semibold bg-blue-400 hover:bg-blue-500"/>
+                    <input type="submit" value="Sign in" className={"mt-5 w-3/4 h-8 cursor-pointer rounded-md text-gray-100 font-semibold hover:bg-blue-500" + (submitStatus ? " bg-green-400" : " bg-blue-400")}/>
                </form>
           </div>
           {currentUser && <Navigate to={"/"}/>}

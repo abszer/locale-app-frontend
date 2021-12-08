@@ -71,7 +71,7 @@ const CreatePostForm = () => {
      }
 
      const handleLocationOnKeyDown = (e) => {
-          if(e.key == 'Backspace'){
+          if(e.key === 'Backspace'){
                setDropDownVisible(false)
           }else if(e.key){
                setDropDownVisible(true)

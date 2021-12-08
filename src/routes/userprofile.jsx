@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useLocation } from 'react-router';
-import { FaAndroid, FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
 import { MdShareLocation } from 'react-icons/md';
 import { BiUpvote } from 'react-icons/bi'
 import { BiDownvote } from 'react-icons/bi'
@@ -24,14 +24,12 @@ const UserProfile = () => {
           let totalUpVotesVar = 0;
           let totalDownVotesVar = 0;
           
-          console.log('testss')
           for(const post of posts){
                if(post.author === selectedUserProfile){
                     totalDownVotesVar += post.downVotes;
                     totalUpVotesVar += post.upVotes;
                     totalPostsVar += 1;
                }
-               console.log("not author")
           }
           console.log(totalDownVotesVar, totalUpVotesVar, totalDownVotesVar)
           
