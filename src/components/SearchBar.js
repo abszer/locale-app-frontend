@@ -8,7 +8,6 @@ const SearchBar = ({ posts, setSearchResults}) => {
 
      const searchIconOnKeyPress = (e) => {
 
-          // SET VALUE BASED ON STATE ONCHANGE IN THE FUTURE
           
           if(e.key !== 'Backspace'){
                setSearchIconVisible(false);
@@ -21,7 +20,7 @@ const SearchBar = ({ posts, setSearchResults}) => {
           //      setSearchIconVisible(true);
           // }
           
-     }
+     }        
 
      const handleSearchOnChange = (e) => {
           setSearchQuery(e.target.value)

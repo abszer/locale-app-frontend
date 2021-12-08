@@ -74,7 +74,7 @@ const Card = ({ post, handleUpVote, handleDownVote, handleImgOnClick, handleEdit
                     <div className="title-location flex flex-col items-center pb-2 border-b w-3/4 m-auto">
                          <p className="absolute self-start -ml-7 mt-1 text-xs text-blue-400 hover:text-blue-500 cursor-pointer"><Link to={"/userprofile"} state={{selectedUserProfile: post.author}}>{post.author}</ Link></p>
                          <p className={"font-heading antialiased text-lg " + postTitleColor}>{post.title}</p>
-                         <a onClick={()=>{ window.location.href="https://www.google.com/maps/search/?api=1&query=" + post.location.split(" ").join("+") }} className="flex justify-center items-center gap-2 font-body text-xs text-blue-700 hover:text-blue-900 cursor-pointer"><GrMapLocation />{post.location}</a>
+                         <p onClick={()=>{ window.location.href="https://www.google.com/maps/search/?api=1&query=" + post.location.split(" ").join("+") }} className="flex justify-center items-center gap-2 font-body text-xs text-blue-700 hover:text-blue-900 cursor-pointer"><GrMapLocation />{post.location}</p>
                     </div>
                     <div className="votes-date flex w-full items-center justify-between pl-3 pr-3">
                          <div className="flex flex-col">

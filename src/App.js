@@ -21,7 +21,6 @@ const App = () => {
   const getPosts = () => {
     axios.get("https://localeapi.azurewebsites.net/api/posts")
       .then((response) => {
-        console.log(response.data);
         setPosts(response.data)
       })
   }
@@ -33,7 +32,6 @@ const App = () => {
       axios.put("https://localeapi.azurewebsites.net/api/posts/" + post.postId, {...post, 'upVotes': post.upVotes + 1 })
       .then((response) => {
         getPosts()
-        console.log(response.data)
       })
     }
     
@@ -45,7 +43,6 @@ const App = () => {
       axios.put("https://localeapi.azurewebsites.net/api/posts/" + post.postId, {...post, 'downVotes': post.downVotes - 1 })
       .then((response) => {
         getPosts()
-        console.log(response.data)
       })
     }
     

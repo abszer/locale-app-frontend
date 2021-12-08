@@ -26,8 +26,8 @@
 ## Day 10
 - Address Auto Complete
 - Edit Funcitionality
-- (x) Google Maps Integration
-- (x) Search bar functionality
+- Google Maps Integration
+- Search bar functionality
 
 ## Attributions
 - Ecommerce Icons made by feen from https://www.flaticon.com/authors/feen
